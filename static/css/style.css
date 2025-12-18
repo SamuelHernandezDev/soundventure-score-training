@@ -1,0 +1,217 @@
+@import url(
+'https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap');
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    background: #2b213b;
+    text-align: center;
+    overflow:hidden; /* Bloquea cualquier scroll */
+}
+
+b{
+    font-family: monospace;
+    font-size: 1.1rem;
+    font-weight:700;
+}
+
+.options-bar {
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+    background:  #221c2c;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Hace que ocupe todo el ancho disponible */
+    max-width: 950px; /* Establece el máximo ancho de la barra */
+    margin: 0 auto 0px auto; /* Centra la barra y la separa 20px de los canvas */
+    position: relative;
+    top: 20px; /* Mueve la barra 20px hacia abajo respecto al contenedor */
+}
+
+#canvas-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px; /* Asegura que el contenedor de los canvas tenga un tamaño adecuado */
+}
+
+
+.option {
+    color: #7f7f7f;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 1px 10px;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.option:hover {
+    color: #ffffff;
+}
+
+.option.active {
+    color: #b181ff;
+}
+
+.separator {
+    width: 7px;
+    height: 30px;
+    background-color: #2b213b;
+    border-radius: 2px;
+    align-self: center;
+}
+
+/* Contenedor principal que organiza canvas y controles */
+#main-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 100vh;           /* Ocupa toda la altura de la pantalla */
+    position: relative;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;        /* Evita desbordamientos */
+}
+
+/* Contenedor del juego, centrado */
+#game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  /* Acomoda elementos en columna */
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+}
+
+/* Canvas principal con superposición centrada */
+#partituraIndividual,#partituraDual, #partituraClaveSol, #partituraClaveFa {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centrado horizontal */
+}
+
+/* Ajustes individuales de los canvas */
+#partituraIndividual {
+    z-index: 1;
+    border-radius: 30px;
+   /*  background: #2b213b;*/
+    background: transparent;
+    border: 0px solid rgba(255, 255, 255, 0.2);
+    /* border: 1px solid #eeeeee;*/
+    top: -355px ;
+}
+
+/* Ajustes individuales de los canvas */
+#partituraDual {
+    z-index: 1;
+    border-radius: 30px;
+    background: transparent;
+    border: 0px solid rgba(255, 255, 255, 0.2);
+    /*border: 1px solid #eeeeee;*/
+    top: -175px ;
+}
+
+#partituraClaveSol {
+    z-index: 2;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    /*border: 1px solid #1900fa;*/
+    top: -355px ;
+}
+
+#partituraClaveFa {
+    z-index: 2;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    /*border: 1px solid #ff0303;*/
+    top: -175px ;
+}
+
+
+/* Información de las teclas presionadas y las notas */
+#informacion {
+    margin-top: -5%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    
+}
+
+#tecla-display,
+#nota-display, #clave-actual{
+    font-family: "Roboto Mono", "Roboto Mono", "Vazirmatn", monospace;
+    font-size: 0.9rem;
+    padding: 10px;                   /* Añadir espacio interno */
+    background-color: rgba(85, 88, 120, 0.7); /* Fondo oscuro semitransparente */
+    border-radius: 10px;             /* Bordes redondeados */
+    color: #1e1829;                    /* Texto blanco */
+    text-align: center;              /* Centrar el texto */
+    display: inline-block;           /* Permitir que el bloque se ajuste al contenido */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para resaltar */
+    margin: 10px;                    /* Margen para separación */
+}
+
+/* Efecto de transición suave para los elementos */
+#informacion {
+    transition: opacity 0.3s ease;
+}
+
+#informacion:hover {
+    opacity: 0.9;
+}
+
+.piano-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.3); /* Escala al 70% del tamaño original */
+    transform-origin: center; /* Centrar la escala */
+    margin-top: -23%;
+}
+
+.piano-keys-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.piano-keys {
+    width: 5rem;
+    cursor: pointer;
+    position: relative;
+    height: 20rem;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+.white-key {
+    background-color: transparent;
+}
+
+.black-key {
+    width: 2rem;
+    height: 13rem;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #555878  ;
+    z-index: 2;
+    margin: 0 -20px 0 -20px;
+}
+
+.piano-keys {
+    transition: background-color 0.3s ease; /* Transición suave de color */
+}
+
+.piano-keys.pressed {
+    background-color: #b181ff !important; /* Color de transición cuando se presiona */
+}
