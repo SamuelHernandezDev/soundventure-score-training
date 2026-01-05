@@ -6,11 +6,11 @@ function inicializarPartitura(clave = 'sol') {
     const factorEscala = 0.55;
 
     // Definiciones de imágenes y posiciones
-    const imagenClaveSol = '/static/image/ClaveSol3.png';
+    const imagenClaveSol = '/static/assets/images/ClaveSol3.png';
     const posicionImagenSol = { x: 31, y: 95 };
     const tamanoImagenSol = { ancho: 90, alto: 110 };
 
-    const imagenClaveFa = '/static/image/ClaveFa3.png';
+    const imagenClaveFa = '/static/assets/images/ClaveFa3.png';
     const posicionImagenFa = { x: 45, y: 103 }; 
     const tamanoImagenFa = { ancho: 75, alto: 70 };
 

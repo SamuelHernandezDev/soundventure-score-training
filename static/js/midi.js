@@ -1,4 +1,4 @@
-let notasPresionadas = new Set();  // Mantén el conjunto de notas presionadas
+let notasPresionadas = new Set(); // Mantén el conjunto de notas presionadas
 
 let claveActual = "sol"; // Variable global para almacenar la clave actual
 
@@ -6,28 +6,27 @@ let claveActual = "sol"; // Variable global para almacenar la clave actual
 
 function cargarScriptClave() {
 
-    const script = document.createElement('script');
+    const script = document.createElement('script');
 
-    script.type = 'text/javascript';
+    script.type = 'text/javascript';
 
-    script.src = `/static/js/clave${claveActual.charAt(0).toUpperCase() + claveActual.slice(1)}.js`; // Cargar el script correspondiente
+    script.src = `/static/js/clave${claveActual.charAt(0).toUpperCase() + claveActual.slice(1)}.js`; // Cargar el script correspondiente
 
-    script.onload = () => {
+    script.onload = () => {
 
-        console.log(`Script de clave ${claveActual} cargado.`);
+       console.log(`Script de clave ${claveActual} cargado.`);
 
-        actualizarPartitura(); // Llamar a actualizarPartitura después de cargar el script
+       actualizarPartitura(); // Llamar a actualizarPartitura después de cargar el script
 
-    };
+    };
 
-    document.body.appendChild(script);
+    document.body.appendChild(script);
 
-  
-    // Actualizar el texto de la clave actual en la página
+    // Actualizar el texto de la clave actual en la página
 
-    const claveDisplay = document.getElementById("clave-display");
+    const claveDisplay = document.getElementById("clave-display");
 
-    claveDisplay.textContent = claveActual.charAt(0).toUpperCase() + claveActual.slice(1);  // Cambia el texto a "Sol" o "Fa"
+    claveDisplay.textContent = claveActual.charAt(0).toUpperCase() + claveActual.slice(1);  // Cambia el texto a "Sol" o "Fa"
 
 }
 
@@ -67,15 +66,15 @@ function onMIDIMessage(event) {
 
 function midiToNota(note) {
 
-    const notas = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const notas = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-    const octava = Math.floor(note / 12) - 1;  // Determina la octava de la nota
+    const octava = Math.floor(note / 12) - 1; // Determina la octava de la nota
 
-    const nota = notas[note % 12];            // Obtiene la nota de acuerdo al número MIDI
+    const nota = notas[note % 12]; // Obtiene la nota de acuerdo al número MIDI
 
-    console.log(`Convertido MIDI ${note} a: ${nota}${octava}`);  // Depurar la conversión
+    console.log(`Convertido MIDI ${note} a: ${nota}${octava}`); // Depurar la conversión
 
-    return `${nota}${octava}`;  // Devuelve la nota en formato 'C4', 'D#5', etc.
+    return `${nota}${octava}`; // Devuelve la nota en formato 'C4', 'D#5', etc.
 
 }
 
@@ -84,31 +83,31 @@ function midiToNota(note) {
 
 if (navigator.requestMIDIAccess) {
 
-    navigator.requestMIDIAccess().then((midiAccess) => {
+    navigator.requestMIDIAccess().then((midiAccess) => {
 
-        const inputs = midiAccess.inputs;  // Accede a todos los dispositivos MIDI conectados
+        const inputs = midiAccess.inputs;  // Accede a todos los dispositivos MIDI conectados
 
   
-        // Asignar el manejador de mensajes MIDI para cada dispositivo conectado
+        // Asignar el manejador de mensajes MIDI para cada dispositivo conectado
 
-        inputs.forEach(input => {
+        inputs.forEach(input => {
 
-            input.onmidimessage = onMIDIMessage;  // Asocia la función onMIDIMessage al evento onmidimessage
+            input.onmidimessage = onMIDIMessage;  // Asocia la función onMIDIMessage al evento onmidimessage
 
-        });
+        });
 
 
-        console.log("Conectado a los dispositivos MIDI");
+        console.log("Conectado a los dispositivos MIDI");
 
-    }).catch((err) => {
+    }).catch((err) => {
 
-        console.error("No se pudo acceder al dispositivo MIDI", err);
+        console.error("No se pudo acceder al dispositivo MIDI", err);
 
-    });
+    });
 
 } else {
 
-    console.log("Web MIDI API no soportada en este navegador.");
+    console.log("Web MIDI API no soportada en este navegador.");
 
 }
 
